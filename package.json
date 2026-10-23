@@ -1,0 +1,12 @@
+{
+  "name": "tiktok-live-overlay-antidetect",
+  "version": "1.0.0",
+  "description": "Giao diện TikTok Live Overlay chống quét trùng lặp nội dung cho OBS / TikTok Live Studio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok Live Realtime Clock Overlay</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body class="clock-overlay-body">
+  <div class="clock-wrapper" id="clockWrapper">
+    <!-- Huy hiệu LIVE & Ngày tháng -->
+    <div class="meta-row">
+      <span class="live-tag">
+        <span class="pulse-dot"></span> LIVE
+      </span>
+      <span id="currentDate" class="date-text">2026-10-23</span>
+    </div>
+
+    <!-- Đồng hồ Giờ : Phút : Giây Siêu To -->
+    <div class="main-clock-row">
+      <span id="clockTime" class="clock-digits">17:19:30</span>
+      <span id="clockMs" class="clock-ms">.852</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
