@@ -1,13 +1,13 @@
 /* ==========================================================================
-   TIKTOK LIVE REALTIME CLOCK OVERLAY (CHỈ GIỮ THỜI GIAN THỰC SIÊU TO)
+   TIKTOK LIVE HORIZONTAL BANNER OVERLAY
+   Style theo mẫu thanh ngang: Giờ + Ngày tháng bên trái, Title in đậm bên phải
    ========================================================================== */
 
 :root {
-  --tk-pink: #FE2C55;
-  --tk-cyan: #25F4EE;
-  --clock-color: #FFFFFF;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --navy-dark: #0f142b;
+  --navy-light: #1b244d;
 }
 
 * {
@@ -21,7 +21,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  /* Nền trong suốt để OBS / TikTok Live Studio lồng trực tiếp đè lên video */
+  /* Nền trong suốt để gắn vào OBS / TikTok Studio đè lên video */
   background: transparent !important;
   display: flex;
   align-items: center;
@@ -29,96 +29,114 @@ html, body {
   user-select: none;
 }
 
-/* Khung chứa đồng hồ */
-.clock-wrapper {
+/* ================= THANH BANNER NGANG ================= */
+.banner-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 96%;
+  max-width: 1200px;
+  min-height: 90px;
+  background: #0f142b;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* KHỐI BÊN TRÁI: GIỜ & NGÀY THÁNG (NỀN TRẮNG) */
+.time-block {
+  background: #ffffff;
+  padding: 8px 24px 10px 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 24px 44px;
-  background: rgba(10, 12, 18, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 36px;
-  border: 2px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.75), 0 0 30px rgba(37, 244, 238, 0.2);
-  transition: transform 0.2s ease;
-}
-
-/* Dòng trên: Huy hiệu LIVE & Ngày tháng */
-.meta-row {
-  display: flex;
   align-items: center;
-  gap: 18px;
-  margin-bottom: 8px;
+  flex-shrink: 0;
+  min-width: 280px;
 }
 
-.live-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--tk-pink);
-  color: #fff;
-  font-family: var(--font-sans);
-  font-size: clamp(14px, 2.2vw, 22px);
-  font-weight: 900;
-  padding: 4px 16px;
-  border-radius: 20px;
-  letter-spacing: 1.5px;
-  box-shadow: 0 4px 15px rgba(254, 44, 85, 0.6);
-}
-
-.pulse-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #fff;
-  animation: pulseDot 1s infinite;
-}
-
-@keyframes pulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.6; }
-}
-
-.date-text {
-  font-family: var(--font-mono);
-  font-size: clamp(16px, 2.5vw, 26px);
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.85);
-  letter-spacing: 2px;
-}
-
-/* Dòng chính: Giờ:Phút:Giây .Mili-giây Siêu To */
-.main-clock-row {
+/* Hàng hiển thị Giờ : Phút : Giây */
+.clock-row {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  line-height: 1;
+}
+
+.clock-digits {
+  font-size: clamp(44px, 5.5vw, 68px);
+  font-weight: 900;
+  color: #2b2e35;
+  letter-spacing: -0.5px;
   font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
 
-/* Con số Giờ:Phút:Giây phóng to khổng lồ */
-.clock-digits {
-  font-size: clamp(64px, 12vw, 130px);
-  font-weight: 900;
-  color: var(--clock-color);
-  letter-spacing: 2px;
-  line-height: 1;
-  text-shadow: 
-    0 4px 25px rgba(0, 0, 0, 0.9),
-    0 0 35px rgba(37, 244, 238, 0.45);
-}
-
-/* Mili-giây (Đổi liên tục mỗi frame phá hash TikTok) */
+/* Mili-giây (giữ nhỏ để vẫn thay đổi hash liên tục chống bot quét TikTok) */
 .clock-ms {
-  font-size: clamp(28px, 5.5vw, 60px);
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1.8vw, 22px);
   font-weight: 800;
-  color: var(--tk-cyan);
-  margin-left: 6px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 20px rgba(37, 244, 238, 0.8);
+  color: #ff3b5c;
+  margin-left: 4px;
+  opacity: 0.9;
   min-width: 3.5ch;
+}
+
+/* Dòng ngày tháng tiếng Việt (Đã tăng fontSize to rõ theo yêu cầu) */
+.date-text {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.6vw, 19px); /* Tăng to rõ ràng */
+  font-weight: 700;
+  color: #4b505c;
+  margin-top: 4px;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+/* KHỐI BÊN PHẢI: TITLE IN ĐẬM NẰM NGANG VỚI GIỜ (NỀN XANH NAVY) */
+.title-block {
+  flex: 1;
+  background: linear-gradient(180deg, var(--navy-light) 0%, var(--navy-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 30px;
+  border-left: 3px solid rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Title in đậm màu vàng cam gradient 3D y chang hình mẫu */
+.banner-title {
+  font-family: var(--font-sans);
+  font-size: clamp(38px, 5.8vw, 74px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  line-height: 1.1;
+  /* Gradient màu vàng cam */
+  background: linear-gradient(180deg, #FFE879 0%, #FFB74D 48%, #FF8A24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Đổ bóng chữ nổi khối 3D */
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.85)) drop-shadow(0 1px 0 #7A3500);
+}
+
+/* Responsive khi gắn trên màn hình nhỏ */
+@media (max-width: 650px) {
+  .banner-bar {
+    flex-direction: column;
+    width: 95%;
+  }
+  .time-block {
+    min-width: 100%;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  }
+  .title-block {
+    border-left: none;
+    padding: 14px 18px;
+  }
 }

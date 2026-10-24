@@ -3,26 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TikTok Live Realtime Clock Overlay</title>
+  <title>TikTok Live Banner Overlay - Realtime Clock</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=JetBrains+Mono:wght@700;800;900&display=swap" rel="stylesheet">
 </head>
-<body class="clock-overlay-body">
-  <div class="clock-wrapper" id="clockWrapper">
-    <!-- Huy hiệu LIVE & Ngày tháng -->
-    <div class="meta-row">
-      <span class="live-tag">
-        <span class="pulse-dot"></span> LIVE
-      </span>
-      <span id="currentDate" class="date-text">2026-10-23</span>
+<body>
+  <div class="banner-bar" id="bannerBar">
+    <!-- KHỐI BÊN TRÁI: GIỜ & NGÀY THÁNG (NỀN TRẮNG) -->
+    <div class="time-block">
+      <div class="clock-row">
+        <span id="clockTime" class="clock-digits">14:17:40</span>
+        <span id="clockMs" class="clock-ms">.385</span>
+      </div>
+      <div id="currentDate" class="date-text">
+        Thứ Bảy, 24 Tháng Mười, 2026, tuần 43
+      </div>
     </div>
 
-    <!-- Đồng hồ Giờ : Phút : Giây Siêu To -->
-    <div class="main-clock-row">
-      <span id="clockTime" class="clock-digits">17:19:30</span>
-      <span id="clockMs" class="clock-ms">.852</span>
+    <!-- KHỐI BÊN PHẢI: TITLE IN ĐẬM NẰM NGANG VỚI GIỜ (NỀN XANH NAVY) -->
+    <div class="title-block">
+      <h1 id="bannerTitle" class="banner-title">IB DÉP LÀO TIEUSU</h1>
     </div>
   </div>
 
